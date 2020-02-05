@@ -24,7 +24,7 @@ Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueToastr2);
 Vue.use(BootstrapVue)
 
-ApiService.init('http://joola.test/api');
+ApiService.init(process.env.VUE_APP_API_URL);
 
 if (store.dispatch('isLoggedIn'))
   ApiService.setHeader(store.getters.GET_AUTH_TOKEN);
