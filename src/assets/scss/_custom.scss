@@ -14,3 +14,45 @@
 .cus-sidebar{
     background: linear-gradient(90deg, #252968 17.53%, #080F53 87.77%);
 }
+.btn-primary{
+    background: linear-gradient(90deg, #252968 17.53%, #080F53 87.77%);
+    border-radius: 7px;
+    height: 50px;
+    text-align:center;
+    vertical-align: middle;
+}
+
+.jo-login{
+    background:  linear-gradient(90deg, rgba(173,176, 249, 0.3) -1.58%, rgba(255, 255, 255, 0.180612) 94.77%, rgba(255, 255, 255, 0.0001) 105.88%);
+  
+    .form-control{
+      background: #FFFFFF;
+      border: 1px solid #DFDFDF;
+      box-sizing: border-box;
+      box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.05);
+      border-radius: 7px;
+      height: 50px;
+    }
+  
+    
+    .jo-trans{
+      background: transparent;
+      margin-top: 40px;
+    }
+  }
+
+  .sidebar .nav-link.active {
+    background: #F6F6F6;
+    border-radius: 0px 50px 50px 0px;
+    width: 90%;
+    color: #252968
+  }
+  .jo-input-dark{
+      @extend .form-control;
+      background: #F3F3F3 !important;
+      border: 1px solid #F3F3F3;
+      box-sizing: border-box;
+      border-radius: 7px;
+      height: 50px;
+
+  }

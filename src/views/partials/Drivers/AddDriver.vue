@@ -29,27 +29,27 @@
                                             <div class="jo-form-group">
                                                 <div>
                                                     <label>First Name</label>
-                                                    <input type="text" name="first_name" v-model="first_name"/>
+                                                    <input class="jo-input-dark" type="text" name="first_name" v-model="first_name"/>
                                                 </div>
                                                 <div>
                                                     <label>Last Name</label>
-                                                    <input type="text" name="last_name" v-model="last_name"/>
+                                                    <input class="jo-input-dark" type="text" name="last_name" v-model="last_name"/>
                                                 </div>
                                                 <div>
                                                     <label>Email</label>
-                                                    <input type="text" name="email" v-model="email"/>
+                                                    <input class="jo-input-dark" type="text" name="email" v-model="email"/>
                                                 </div>
                                                 <div>
                                                     <label>Phone Number</label>
-                                                    <input type="text" v-model="phone"/>
+                                                    <input class="jo-input-dark" type="text" v-model="phone"/>
                                                 </div>
                                                 <div>
                                                     <label>Password</label>
-                                                    <input type="password" readonly name="password" v-model="password"/>
+                                                    <input class="jo-input-dark" type="password" readonly name="password" v-model="password"/>
                                                 </div>
                                                 <div>
                                                     <label>Driving License</label>
-                                                    <input type="text" v-model="driving_license"/>
+                                                    <input class="jo-input-dark" type="text" v-model="driving_license"/>
                                                 </div>
                                                 <div>
                                                     <label> Click this button to generate password </label>
@@ -67,15 +67,15 @@
                                             <div class="jo-form-group">
                                                 <div>
                                                     <label>Bank Name</label>
-                                                    <input type="text" v-model="bank_name"/>
+                                                    <input class="jo-input-dark" type="text" v-model="bank_name"/>
                                                 </div>
                                                 <div>
                                                     <label>Account Name</label>
-                                                    <input type="text"  v-model="acc_name"/>
+                                                    <input class="jo-input-dark" type="text"  v-model="acc_name"/>
                                                 </div>
                                                 <div>
                                                     <label>Account Number</label>
-                                                    <input type="text"  v-model="acc_number"/>
+                                                    <input class="jo-input-dark" type="text"  v-model="acc_number"/>
                                                 </div>
                             
                                             </div>
@@ -168,7 +168,17 @@
                     driving_license: this.driving_license
                 }).then((response) => {
                     // this.fillDrivers(response);
+                    
                     this.$toastr.success('Driver Created')
+                    this.first_name = '',
+                    this.last_name = '',
+                    this.email = '',
+                    this.phone = '',
+                    this.bank_name = '',
+                    this.acc_number = '',
+                    this.acc_name = '',
+                    this.password = '',
+                    this.driving_license = ''
                 }).catch((error)=> {
                     console.log(error)
                     this.$toastr.error(JSON.stringify(error.errors), "User Creation failed!", {timeOut: 5000});
@@ -205,13 +215,7 @@
                 color:#818F90;
 
             }
-            input{
-                width: 100%;
-                height:40px;
-                border-radius: 4px;
-                border:1px solid #818F90;
-
-            }
+            
         }
     }
 
