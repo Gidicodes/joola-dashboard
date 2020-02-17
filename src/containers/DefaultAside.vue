@@ -69,7 +69,7 @@
           <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
           <div class="avatars-stack mt-2">
             <div class="avatar avatar-xs">
-              <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
             </div>
           </div>
         </b-list-group-item>
@@ -83,7 +83,7 @@
         <div class="message">
           <div class="py-3 pb-5 mr-3 float-left">
             <div class="avatar">
-              <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
               <b-badge variant="success" class="avatar-status"></b-badge>
             </div>
           </div>
@@ -98,7 +98,7 @@
         <div class="message">
           <div class="py-3 pb-5 mr-3 float-left">
             <div class="avatar">
-              <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
               <b-badge variant="danger" class="avatar-status"></b-badge>
             </div>
           </div>
@@ -113,7 +113,7 @@
         <div class="message">
           <div class="py-3 pb-5 mr-3 float-left">
             <div class="avatar">
-              <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
               <b-badge variant="info" class="avatar-status"></b-badge>
             </div>
           </div>
@@ -143,7 +143,7 @@
         <div class="message">
           <div class="py-3 pb-5 mr-3 float-left">
             <div class="avatar">
-              <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
               <b-badge variant="dark" class="avatar-status"></b-badge>
             </div>
           </div>

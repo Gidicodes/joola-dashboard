@@ -8,7 +8,7 @@
                     <h3 class="page-title">
                         <span class="page-title-icon bg-gradient-primary text-white mr-2"> <i
                                 class="mdi mdi-account-card-details"></i></span>
-                        Customers
+                        Customer Location History
                     </h3>
                 </div>
                 <div class="row">
@@ -70,7 +70,7 @@
     // import Layout from '../../components/Layout';
     import TableActions from "@/views/components/TableHelpers/TableActions";
     import Loader from '@/views/components/Loader/Loader';
-    import { customer } from "@/services/customer.service";
+    import { userService } from "@/services/user.service";
     // import {Category} from "../../services/Category.services";
     // import {Category as Food} from "../../services/Food.services";
 // import { error } from 'util';
@@ -107,7 +107,7 @@
             return {
                 title: "Customers",
                 actions: action,
-                columnsHeader: ['ID', 'Avatar', 'Username', 'Email', 'Phone', 'Created', 'Status', 'Actions'],
+                columnsHeader: ['ID', 'Avatar', 'Username', 'Email', 'Phone', 'Created', 'Status'],
                 ads: [],
                 contentData: {},
                 currentPage: 1,
@@ -134,18 +134,18 @@
             }
         },
         async created() {
-            await this.fetchCustomers();
+            await this.fetchLocations();
         },
         watch: {
             perPage: {
                 handler: function () {
                     this.currentPage = 1;
-                    this.fetchCustomers();
+                    this.fetchLocations();
                 }
             },
             currentPage: {
                 handler: async function () {
-                    await this.fetchCustomers();
+                    await this.fetchLocations();
                 }
             },
             filter: {
@@ -154,7 +154,7 @@
                     if (value.length > 2) {
                         this.searchAds();
                     } else if (oldVal.length > 0 && value.length === 0) {
-                        this.fetchCustomers();
+                        this.fetchLocations();
                     }
                 }
             },
@@ -168,9 +168,10 @@
         },
 
         methods: {
-            fetchCustomers() {
+            fetchLocations() {
                 this.loading = true;
-                customer.getAll().then((response) => {
+                var id = this.$route.params.id;
+                userService.getLocations({id:id}).then((response) => {
                     this.fillCustomers(response);
                 }).catch(()=> {
                     this.$toastr.error('Something Went wrong')

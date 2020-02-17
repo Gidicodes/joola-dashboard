@@ -107,7 +107,7 @@ const action = [
 
 export default {
   components: { Loader, TableActions },
-  name: "User",
+  name: "Driver",
   data() {
     return {
       title: "Request",
@@ -160,7 +160,6 @@ export default {
     fetchTrip() {
       this.loading = true;
       var id = this.$route.params.id;
-      console.log(id)
       userService
         .userDetails({ id: id })
         .then(response => {

@@ -1,36 +1,42 @@
 import {ApiService} from "./api.service";
 
-const tripService = {
-    getAll: async () => {
-        return await ApiService.get('/admin/trip/').then((res)=> {
+const trip = {
+    getAll: async (perPage = 15, page = 1) => {
+        return await ApiService.get('/admin/trip/pending?perPage=' + perPage + '&page=' + page).then((res)=> {
             return Promise.resolve(res.data);
         }).catch((error) =>{
             return Promise.reject(error.response.data);
         });
     },
-    authorize: async (token) => {
-        return await ApiService.customRequest({
-            headers: {'Authorization': "Bearer "+token},
-            method: "GET",
-            url: ApiService.getBaseUrl() + "/user"
-        }).then((res) => {
-            return Promise.resolve(res.data.data);
-        }).catch((error) => {
+    getTrip: async ({id:id}) => {
+        return await ApiService.get('/admin/trip/'+id).then((res)=>{
+            return Promise.resolve(res.data);
+        }).catch((error)=>{
             return Promise.reject(error.response.data);
         });
     },
-    register: async ({first_name,last_name,email,password}) => {
-        return await ApiService.post('/admin/register', {
-            first_name:first_name,
-            last_name: last_name,
-            email: email,
-            password: password,
-        }).then((res) => {
+
+    getInProgress: async(perPage=15, page=1) => {
+        return await ApiService.get('/admin/trip/progress?perPage=' + perPage + '&page=' + page).then((res)=> {
             return Promise.resolve(res.data);
-        }).catch((error) => {
+        }).catch((error) =>{
             return Promise.reject(error.response.data);
         });
+    },
+    assignDriver: async({id,driver}) => {
+        return await ApiService.post('/admin/trip/'+id+'/'+driver).then((res) => {
+            return Promise.resolve(res.data);
+        }).catch((error) => {
+            return Promise.reject(error.respnse.data);
+        });
+    },
+    deleteTrip: async({id})=> {
+        return await ApiService.delete('/admin/trip/'+id).then((res) => {
+            return Promise.resolve(res.data);
+        }).catch((error)=> {
+            return Promise.reject(error.respnse.data);
+        })
     }
 };
 
-export {tripService};
+export {trip};

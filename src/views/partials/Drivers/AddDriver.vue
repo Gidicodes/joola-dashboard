@@ -102,7 +102,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -191,33 +190,5 @@
 </script>
 
 <style lang="scss" scoped>
-.jo-form{
-    width:100%;
-    display:flex;
-    border-bottom: 1px solid #818F90;
-    padding-bottom: 40px;
 
-    &-label{
-        width: 30%;
-        font-weight:bold;
-    }
-    &-group{
-        width:60%;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-        grid-gap: 1.5rem;
-
-        div{
-            display:flex;
-            flex-direction: column;
-            label{
-                font-size:14px;
-                color:#818F90;
-
-            }
-            
-        }
-    }
-
-}
 </style>

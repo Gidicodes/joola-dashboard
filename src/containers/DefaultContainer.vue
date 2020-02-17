@@ -32,6 +32,9 @@ import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 import DefaultHeader from './DefaultHeader'
 import DefaultFooter from './DefaultFooter'
 import Route from '../router';
+import { mapActions } from "vuex";
+
+
 
 
 export default {
@@ -71,6 +74,22 @@ export default {
       if (!loginValid) {
           this.$store.dispatch("UNSET_USER");
           Route.push({name: 'login'});
+      }
+
+      this.$echo.channel('new-trip').listen('.trip.created', (payload) => {
+          this.$toastr.success('Click this button to <a href="requests/'+payload.data.id +'" class="btn btn-toast">View</a>' , 'New Trip Request', {onclick: null});
+          this.getNotification()
+      })
+      this.getNotification()
+  },
+  methods: {
+      ...mapActions({ notification: "GetNotification" }),
+      async getNotification() {
+        this.loading = true;
+        await this.notification().then((res)=> {
+          
+        }).catch((error)=> {
+        })
       }
   }
     

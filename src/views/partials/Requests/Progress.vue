@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- partial -->
+       
         <div class="main-panel" slot="body">
             <Loader :loading-text="loadingText" :showFull=true v-if="isLoading"/>
             <div class="content-wrapper">
@@ -8,7 +8,7 @@
                     <h3 class="page-title">
                         <span class="page-title-icon bg-gradient-primary text-white mr-2"> <i
                                 class="mdi mdi-account-card-details"></i></span>
-                        Customers
+                        Started Requests
                     </h3>
                 </div>
                 <div class="row">
@@ -37,19 +37,17 @@
                                                      :fields="columnsHeader"
                                                      :items="allContent"
                                                      :per-page="0"
+                                                     
                                                      show-empty>
                                                 <div class="text-center text-primary my-2" slot="table-busy">
                                                     <b-spinner class="align-middle"></b-spinner>
                                                     <strong>Loading...</strong>
                                                 </div>
-                                                <span slot="Avatar" slot-scope="data" v-html="data.item.Avatar"></span>
-                                                
-                                                <template slot="Actions" slot-scope="data">
-                                                    
+                                                <template slot="actions" slot-scope="data">
                                                     <table-actions :actions=actions
                                                                    :data=data.item
-                                                                   @viewUser=viewUser
-                                                                  ></table-actions>
+                                                                   @view="view"
+                                                                   ></table-actions>
                                                 </template>
                                             </b-table>
                                             <b-pagination :per-page="perPage" :total-rows="total" size="md"
@@ -70,44 +68,49 @@
     // import Layout from '../../components/Layout';
     import TableActions from "@/views/components/TableHelpers/TableActions";
     import Loader from '@/views/components/Loader/Loader';
-    import { customer } from "@/services/customer.service";
-    // import {Category} from "../../services/Category.services";
+    import {trip} from "@/services/trip.service";
     // import {Category as Food} from "../../services/Food.services";
 // import { error } from 'util';
 
     const action = [
         {
             class: 'btn btn-primary btn-md',
-            text: 'Options',
-            title: "Options",
+            text: 'Option',
+            title: "Option",
             dropdown: [
                 {
                     args: ['ID'],
-                    callback: 'viewUser',
+                    callback: 'view',
                     text: 'View',
                 },
-                // {
-                //     args: ['ID'],
-                //     callback: 'openExtra',
-                //     text: 'Edit',
-                // },
                 {
-                    args: ['ID'],
-                    callback: 'blockUser',
-                    text: 'Block',
+                    args: ['uuid'],
+                    callback: 'openEdit',
+                    text: 'Edit',
+                },
+                {
+                    args: ['uuid'],
+                    callback: 'viewDetail',
+                    text: 'Assign Driver',
+                },
+                {
+                    args: ['uuid'],
+                    callback: 'viewDetail',
+                    text: 'Delete',
                 }
+
                 
             ]
         }
     ];
     export default {
         components: {Loader, TableActions},
-        name: "ListCustomers",
+        name: "ListCategory",
         data() {
             return {
-                title: "Customers",
+                title: "ListCategories",
                 actions: action,
-                columnsHeader: ['ID', 'Avatar', 'Username', 'Email', 'Phone', 'Created', 'Status', 'Actions'],
+                columnsHeader: ['ID','Customer ID', 'Username', 'Email', 'Location', 'Timestamp', 'Status', 'actions'],
                 ads: [],
                 contentData: {},
                 currentPage: 1,
@@ -134,18 +137,18 @@
             }
         },
         async created() {
-            await this.fetchCustomers();
+            await this.fetchTrips();
         },
         watch: {
             perPage: {
                 handler: function () {
                     this.currentPage = 1;
-                    this.fetchCustomers();
+                    this.fetchTrips();
                 }
             },
             currentPage: {
                 handler: async function () {
-                    await this.fetchCustomers();
+                    await this.fetchTrips();
                 }
             },
             filter: {
@@ -154,7 +157,7 @@
                     if (value.length > 2) {
                         this.searchAds();
                     } else if (oldVal.length > 0 && value.length === 0) {
-                        this.fetchCustomers();
+                        this.fetchTrips();
                     }
                 }
             },
@@ -168,25 +171,26 @@
         },
 
         methods: {
-            fetchCustomers() {
+            fetchTrips() {
                 this.loading = true;
-                customer.getAll().then((response) => {
-                    this.fillCustomers(response);
-                }).catch(()=> {
-                    this.$toastr.error('Something Went wrong')
-                })
+                trip.getInProgress(this.perPage, this.currentPage).then((response) => {
+                    this.fillTrip(response.data);
+                }).catch(() => {
+                });
             },
-            fillCustomers(data = []) {
+            fillTrip(data = []) {
                 this.allContent = [];
-                data.data.forEach(({image_url: image_url, first_name: first_name, uuid: uuid, phone: phone, status: status, email: email, created_at: created_at}) => {
+                this.total = data.total;
+                console.log(data.data)
+                data.data.forEach(({status: status, user: user, destinations: destinations, trip_start: trip_start, id:id}) => {
                     this.allContent.push({
-                        Avatar: '<img src="' + image_url + '"/>',
-                        Username: first_name,
-                        Phone: phone,
-                        Status: status == 1 ? 'Active' :'Deactivated',
-                        Email : email,
-                        ID: uuid,
-                        Created: created_at
+                        ID:id,
+                        'Customer ID': user.uuid,
+                        Username: user.first_name,
+                        Email : user.email,
+                        Location :destinations.address,
+                        Timestamp: trip_start,
+                        Status: status.status,
                     });
                 });
                 this.loading = false;
@@ -194,11 +198,85 @@
             beforeOpen(event) {
                 this.editData = event.params;
             },
-            viewUser(id){
-                this.$router.push('users/'+id)
-            }
-            
-            
+            view(id){
+                this.$router.push('requests/'+id)
+            },
+            async addExtra(uuid) {
+                this.isLoading = true;
+                let data = {
+                    food_uuid: this.catuuid,
+                    name: this.extra_name,
+                    price: this.extra_price
+                };
+                await Food.addExtra(data).then((res) => {
+                    this.extra_name = '';
+                    this.extra_price = '';
+                    this.$toastr.success(res.message, {timeOut: 5000});
+
+                }).catch((error) => {
+                    this.$toastr.error(error.error.message, "Update Ads Content Creation failed!", {timeOut: 5000});
+                });
+                this.isLoading = false;
+            },
+            async getFood(uuid){
+                this.isLoading = true;
+                await Food.foodDetail(this.catuuid).then((res)=> {
+                    let data = res.data;
+                    this.data = {
+                        ...data,
+                        'category_name' : data.category.name
+                    }
+                }).catch((error) => {
+
+                })
+                this.isLoading = false;
+            },
+            async deleteFood(uuid){
+                this.isLoading = true;
+                await Food.deleteFood(this.catuuid).then((res)=> {
+                    this.data = [];
+                    this.$toastr.success(res.message, {timeOut: 5000});
+                    this.$modal.hide('viewFood');
+                }).catch((error)=> {
+
+                })
+                this.isLoading=false
+            },
+            async tagFood(uuid){
+                this.isLoading = true;
+                if (this.discount != 0){
+                    let data = {
+                        'discount' : this.discount
+                    }
+                    await Food.tagFood(this.catuuid, data).then((res)=> {
+                    this.data = [];
+                    this.$toastr.success(res.message, {timeOut: 5000});
+                    this.$modal.hide('viewFood');
+                }).catch((error)=> {
+
+                })
+                this.isLoading=false
+                }
+                
+            },
+            openExtra(uuid) {
+                this.catuuid = uuid;
+                    this.$modal.show('addExtra');
+            },
+            openEdit(uuid){
+                this.catuuid = uuid;
+                this.getFood();
+                this.$modal.show('editFood');
+            },
+            openPromo(){
+                this.$modal.hide('viewFood');
+                this.$modal.show('promo');
+            },
+            viewDetail(uuid) {
+                this.catuuid = uuid;
+                this.getFood();
+                this.$modal.show('viewFood');
+            },
         }
     }
 </script>

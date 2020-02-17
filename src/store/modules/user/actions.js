@@ -55,6 +55,14 @@ const actions = {
         return Promise.reject(error);
       });
 
+  },
+  GetNotification: async(context)=> {
+    return await userService.getNotification().then((res) => {
+      context.commit("SET_NOTIFICATION", res.data)
+      return true
+    }).catch((error)=> {
+      return Promise.reject(error);
+    });
   }
 };
 

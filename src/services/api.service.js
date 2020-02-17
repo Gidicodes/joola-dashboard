@@ -11,7 +11,11 @@ const ApiService = {
     },
     setHeader(token) {
         axios.defaults.headers.common["Authorization"] ="Bearer "+token;
+        // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+        // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        // axios.defaults.headers.common['Accept'] = 'application/json';
         // axios.defaults.headers.common["Accept"] ="application/json";
+        // axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
         // axios.defaults.headers.common["Content-Type"] ="multipart/form-data";
     },
     removeHeader() {
@@ -49,7 +53,12 @@ const ApiService = {
      **/
     customRequest(data) {
         return axios(data)
+    },
+    processRequest(data)
+    {
+        
     }
+
 };
 
 export {ApiService};

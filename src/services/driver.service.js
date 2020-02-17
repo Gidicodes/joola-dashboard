@@ -1,8 +1,16 @@
 import {ApiService} from "./api.service";
 
 const driver = {
-    getDrivers: async () => {
-        return await ApiService.get('/admin/driver/').then((res)=> {
+    getDrivers: async (perPage=15, page=1) => {
+        return await ApiService.get('/admin/driver/?perPage=' + perPage + '&page=' + page).then((res)=> {
+            return Promise.resolve(res.data);
+        }).catch((error) =>{
+            return Promise.reject(error.response.data);
+        });
+    },
+
+    activeDrivers: async (perPage=15, page=1) => {
+        return await ApiService.get('/admin/driver/active?perPage=' + perPage + '&page=' + page).then((res)=> {
             return Promise.resolve(res.data);
         }).catch((error) =>{
             return Promise.reject(error.response.data);

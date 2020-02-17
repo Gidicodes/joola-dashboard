@@ -3,6 +3,7 @@ const mutations = {
     SET_AUTH_TOKEN: (state, authentication) => {
         state.AUTHENTICATION_TOKEN = authentication;
     },
+    SET_NOTIFICATION:(state, notification) => state.NOTIFICATION = notification,
     REMOVE_AUTH: (state) => {
         state.AUTHENTICATION_TOKEN = '';
         state.USER = '';

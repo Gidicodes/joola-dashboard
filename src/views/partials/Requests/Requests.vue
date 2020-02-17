@@ -208,18 +208,17 @@
                                                      :fields="columnsHeader"
                                                      :items="allContent"
                                                      :per-page="0"
+                                                     
                                                      show-empty>
                                                 <div class="text-center text-primary my-2" slot="table-busy">
                                                     <b-spinner class="align-middle"></b-spinner>
                                                     <strong>Loading...</strong>
                                                 </div>
-                                                <span slot="Icon" slot-scope="data" v-html="data.item.Icon"></span>
                                                 <template slot="actions" slot-scope="data">
                                                     <table-actions :actions=actions
                                                                    :data=data.item
-                                                                   @openExtra="openExtra"
-                                                                   @openEdit="openEdit"
-                                                                   @viewDetail="viewDetail"></table-actions>
+                                                                   @view="view"
+                                                                   ></table-actions>
                                                 </template>
                                             </b-table>
                                             <b-pagination :per-page="perPage" :total-rows="total" size="md"
@@ -240,31 +239,37 @@
     // import Layout from '../../components/Layout';
     import TableActions from "@/views/components/TableHelpers/TableActions";
     import Loader from '@/views/components/Loader/Loader';
-    // import {Category} from "../../services/Category.services";
+    import {trip} from "@/services/trip.service";
     // import {Category as Food} from "../../services/Food.services";
 // import { error } from 'util';
 
     const action = [
         {
             class: 'btn btn-primary btn-md',
-            text: 'Options',
-            title: "Options",
+            text: 'Option',
+            title: "Option",
             dropdown: [
                 {
-                    args: ['uuid'],
-                    callback: 'openExtra',
-                    text: 'Add Extra',
+                    args: ['ID'],
+                    callback: 'view',
+                    text: 'View',
                 },
                 {
                     args: ['uuid'],
                     callback: 'openEdit',
-                    text: 'Edit Food',
+                    text: 'Edit',
                 },
                 {
                     args: ['uuid'],
                     callback: 'viewDetail',
-                    text: 'View Food',
+                    text: 'Assign Driver',
+                },
+                {
+                    args: ['uuid'],
+                    callback: 'viewDetail',
+                    text: 'Delete',
                 }
+
                 
             ]
         }
@@ -276,7 +281,7 @@
             return {
                 title: "ListCategories",
                 actions: action,
-                columnsHeader: ['Customer ID', 'UserName', 'Customer Email', 'Location', 'Timestamp', 'Status'],
+                columnsHeader: ['ID','Customer ID', 'Username', 'Email', 'Location', 'Timestamp', 'Status', 'actions'],
                 ads: [],
                 contentData: {},
                 currentPage: 1,
@@ -303,18 +308,18 @@
             }
         },
         async created() {
-            await this.fetchCategories();
+            await this.fetchTrips();
         },
         watch: {
             perPage: {
                 handler: function () {
                     this.currentPage = 1;
-                    this.fetchCategories();
+                    this.fetchTrips();
                 }
             },
             currentPage: {
                 handler: async function () {
-                    await this.fetchCategories();
+                    await this.fetchTrips();
                 }
             },
             filter: {
@@ -323,7 +328,7 @@
                     if (value.length > 2) {
                         this.searchAds();
                     } else if (oldVal.length > 0 && value.length === 0) {
-                        this.fetchCategories();
+                        this.fetchTrips();
                     }
                 }
             },
@@ -337,29 +342,35 @@
         },
 
         methods: {
-            fetchCategories() {
+            fetchTrips() {
                 this.loading = true;
-                Food.listFood(this.perPage, this.currentPage).then((response) => {
-                    this.fillCategory(response);
+                trip.getAll(this.perPage, this.currentPage).then((response) => {
+                    this.fillTrip(response.data);
                 }).catch(() => {
                 });
             },
-            fillCategory(data = []) {
+            fillTrip(data = []) {
                 this.allContent = [];
                 this.total = data.total;
-                data.data.forEach(({image_url: image_url, name: name, uuid: uuid, description: description, price: price}) => {
+                console.log(data.data)
+                data.data.forEach(({status: status, user: user, destinations: destinations, trip_start: trip_start, id:id}) => {
                     this.allContent.push({
-                        Icon: '<img src="' + image_url + '"/>',
-                        Name: name,
-                        Description: description,
-                        Price: price,
-                        uuid: uuid
+                        ID:id,
+                        'Customer ID': user.uuid,
+                        Username: user.first_name,
+                        Email : user.email,
+                        Location :destinations.address,
+                        Timestamp: trip_start,
+                        Status: status.status,
                     });
                 });
                 this.loading = false;
             },
             beforeOpen(event) {
                 this.editData = event.params;
+            },
+            view(id){
+                this.$router.push('requests/'+id)
             },
             async addExtra(uuid) {
                 this.isLoading = true;

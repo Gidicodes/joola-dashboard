@@ -33,7 +33,36 @@ const userService = {
         }).catch((error) => {
             return Promise.reject(error.response.data);
         });
+    },
+    userDetails: async({id}) => {
+        return await ApiService.get('/admin/user/'+id).then((res)=> {
+            return Promise.resolve(res.data)
+        }).catch((error)=> {
+            return Promise.reject(error.response.data);
+        });
+    },
+    blockUser: async({id})=> {
+        return await ApiService.post('/admin/user/'+id+'/block').then((res)=> {
+            return Promise.resolve(res.data)
+        }).catch((error)=> {
+            return Promise.reject(error.response.data);
+        });
+    },
+    getLocations: async({id}) => {
+        return await ApiService.get('/admin/user/'+id+'/locations').then((res)=>{
+            return Promise.resolve(res.data)
+        }).catch((error)=>{
+            return Promise.reject(error.response.data);
+        })
+    },
+    getNotification: async()=> {
+        return await ApiService.get('/admin/notification').then((res) => {
+            return Promise.resolve(res.data);
+        }).catch((error) => {
+            return Promise.reject(error.response.data);
+        })
     }
+
 };
 
 export {userService};

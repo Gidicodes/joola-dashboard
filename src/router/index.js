@@ -8,9 +8,17 @@ const DefaultContainer = () => import('@/containers/DefaultContainer')
 
 // Views
 const Dashboard = () => import('@/views/Dashboard')
-const Requests = () => import('@/views/partials/Requests')
+const Requests = () => import('@/views/partials/Requests/Requests')
+const Request = () => import('@/views/partials/Requests/Request')
+const Progress = () => import('@/views/partials/Requests/Progress')
+
 const Customers = () => import('@/views/partials/Customers/Customers')
+const Customer = () => import('@/views/partials/Customers/Customer')
+const CustomerLocation = () => import('@/views/partials/Customers/CustomerLocation')
+
 const Drivers = () => import('@/views/partials/Drivers/Drivers')
+const Driver = () => import('@/views/partials/Drivers/Driver')
+
 const AddDriver = () => import('@/views/partials/Drivers/AddDriver')
 
 
@@ -108,14 +116,39 @@ function configRoutes() {
           component: Requests
         },
         {
+          path: 'started',
+          name: 'Started Requests',
+          component: Progress
+        },
+        {
+          path: 'requests/:id',
+          name: 'Request',
+          component: Request
+        },
+        {
           path: 'customers',
           name: 'Customers',
           component: Customers
         },
         {
+          path: 'users/:id',
+          name: 'Customer',
+          component: Customer
+        },
+        {
+          path: 'user/location/:id',
+          name: 'Customer Locations',
+          component: CustomerLocation
+        },
+        {
           path: 'drivers',
           name: 'Drivers',
           component: Drivers
+        },
+        {
+          path: 'drivers/:id',
+          name: 'Driver',
+          component: Driver
         },
         {
           path: 'driver/create',

@@ -46,8 +46,6 @@ export default {
   methods: {
     handleCallback(callback, argument) {
       if (!callback) return;
-      console.log(callback)
-      console.log(argument)
       this.$emit(callback, ...argument);
 
     },

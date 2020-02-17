@@ -11,7 +11,7 @@
                         Drivers
                     </h3>
                     <div class="jo-flow">
-                        <b-button variant="primary" class="active" to="/driver/create"><span>Add Driver</span></b-button>
+                        <b-button  class=" btn jo-blue btn-md" to="/driver/create"><span>Add Driver</span></b-button>
                     </div>
                 </div>
                 <div class="row">
@@ -51,6 +51,7 @@
                                                     
                                                     <table-actions :actions=actions
                                                                    :data=data.item
+                                                                   @viewUser=viewUser
                                                                    ></table-actions>
                                                 </template>
                                             </b-table>
@@ -85,14 +86,14 @@
             dropdown: [
                 {
                     args: ['ID'],
-                    callback: 'openExtra',
+                    callback: 'viewUser',
                     text: 'View',
                 },
-                {
-                    args: ['ID'],
-                    callback: 'openExtra',
-                    text: 'Edit',
-                },
+                // {
+                //     args: ['ID'],
+                //     callback: 'openExtra',
+                //     text: 'Edit',
+                // },
                 {
                     args: ['ID'],
                     callback: 'openExtra',
@@ -196,7 +197,9 @@
             beforeOpen(event) {
                 this.editData = event.params;
             },
-            
+            viewUser(id){
+                this.$router.push('drivers/'+id)
+            }
         }
     }
 </script>
@@ -209,4 +212,5 @@
     justify-content: flex-end;
     margin-bottom: 30px;
 }
+
 </style>
