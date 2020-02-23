@@ -42,15 +42,8 @@
                                                     <b-spinner class="align-middle"></b-spinner>
                                                     <strong>Loading...</strong>
                                                 </div>
-                                                <span slot="Avatar" slot-scope="data" v-html="data.item.Avatar"></span>
                                                 
-                                                <template slot="Actions" slot-scope="data">
-                                                    
-                                                    <table-actions :actions=actions
-                                                                   :data=data.item
-                                                                   @viewUser=viewUser
-                                                                  ></table-actions>
-                                                </template>
+                                                
                                             </b-table>
                                             <b-pagination :per-page="perPage" :total-rows="total" size="md"
                                                           v-model="currentPage"></b-pagination>
@@ -75,39 +68,14 @@
     // import {Category as Food} from "../../services/Food.services";
 // import { error } from 'util';
 
-    const action = [
-        {
-            class: 'btn btn-primary btn-md',
-            text: 'Options',
-            title: "Options",
-            dropdown: [
-                {
-                    args: ['ID'],
-                    callback: 'viewUser',
-                    text: 'View',
-                },
-                // {
-                //     args: ['ID'],
-                //     callback: 'openExtra',
-                //     text: 'Edit',
-                // },
-                {
-                    args: ['ID'],
-                    callback: 'blockUser',
-                    text: 'Block',
-                }
-                
-            ]
-        }
-    ];
+    
     export default {
         components: {Loader, TableActions},
         name: "ListCustomers",
         data() {
             return {
                 title: "Customers",
-                actions: action,
-                columnsHeader: ['ID', 'Avatar', 'Username', 'Email', 'Phone', 'Created', 'Status'],
+                columnsHeader: ['ID', 'Address', 'Latitude', 'Longitude', 'Created'],
                 ads: [],
                 contentData: {},
                 currentPage: 1,
@@ -172,21 +140,19 @@
                 this.loading = true;
                 var id = this.$route.params.id;
                 userService.getLocations({id:id}).then((response) => {
-                    this.fillCustomers(response);
+                    this.fillLocations(response);
                 }).catch(()=> {
                     this.$toastr.error('Something Went wrong')
                 })
             },
-            fillCustomers(data = []) {
+            fillLocations(data = []) {
                 this.allContent = [];
-                data.data.forEach(({image_url: image_url, first_name: first_name, uuid: uuid, phone: phone, status: status, email: email, created_at: created_at}) => {
+                data.data.forEach(({address: address, id: id, lat: lat, lon: lon, created_at: created_at}) => {
                     this.allContent.push({
-                        Avatar: '<img src="' + image_url + '"/>',
-                        Username: first_name,
-                        Phone: phone,
-                        Status: status == 1 ? 'Active' :'Deactivated',
-                        Email : email,
-                        ID: uuid,
+                        Address: address,
+                        Latitude: lat,
+                        Longitude: lon,
+                        ID: id,
                         Created: created_at
                     });
                 });

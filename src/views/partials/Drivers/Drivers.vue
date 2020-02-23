@@ -207,10 +207,6 @@
 .ml-auto{
     margin-left:auto;
 }
-.jo-flow{
-    display:flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
-}
+
 
 </style>

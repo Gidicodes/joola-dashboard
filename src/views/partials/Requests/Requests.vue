@@ -181,6 +181,12 @@
                                 class="mdi mdi-account-card-details"></i></span>
                         Requests
                     </h3>
+                    <div class="jo-flow">
+                        <b-button  class=" btn jo-blue btn-md ml-3" to="/started"><span>Assigned Reqests</span></b-button>
+                        <b-button  class=" btn btn-warning btn-md ml-3" ><span>In Progress</span></b-button>
+                        <b-button  class=" btn btn-success btn- ml-3" ><span>Completed Trips</span></b-button>
+
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
@@ -189,7 +195,7 @@
                                 <h4 class="card-title"></h4>
                                 <!-- <Datatable :fields="fields" :data="paymentsData" :perPage="1"> -->
                                 <!-- </Datatable> -->
-
+                                
                                 <div class="card-body">
                                     <h4 class="card-title"></h4>
                                     <b-row>

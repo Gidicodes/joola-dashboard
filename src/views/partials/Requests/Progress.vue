@@ -201,64 +201,6 @@
             view(id){
                 this.$router.push('requests/'+id)
             },
-            async addExtra(uuid) {
-                this.isLoading = true;
-                let data = {
-                    food_uuid: this.catuuid,
-                    name: this.extra_name,
-                    price: this.extra_price
-                };
-                await Food.addExtra(data).then((res) => {
-                    this.extra_name = '';
-                    this.extra_price = '';
-                    this.$toastr.success(res.message, {timeOut: 5000});
-
-                }).catch((error) => {
-                    this.$toastr.error(error.error.message, "Update Ads Content Creation failed!", {timeOut: 5000});
-                });
-                this.isLoading = false;
-            },
-            async getFood(uuid){
-                this.isLoading = true;
-                await Food.foodDetail(this.catuuid).then((res)=> {
-                    let data = res.data;
-                    this.data = {
-                        ...data,
-                        'category_name' : data.category.name
-                    }
-                }).catch((error) => {
-
-                })
-                this.isLoading = false;
-            },
-            async deleteFood(uuid){
-                this.isLoading = true;
-                await Food.deleteFood(this.catuuid).then((res)=> {
-                    this.data = [];
-                    this.$toastr.success(res.message, {timeOut: 5000});
-                    this.$modal.hide('viewFood');
-                }).catch((error)=> {
-
-                })
-                this.isLoading=false
-            },
-            async tagFood(uuid){
-                this.isLoading = true;
-                if (this.discount != 0){
-                    let data = {
-                        'discount' : this.discount
-                    }
-                    await Food.tagFood(this.catuuid, data).then((res)=> {
-                    this.data = [];
-                    this.$toastr.success(res.message, {timeOut: 5000});
-                    this.$modal.hide('viewFood');
-                }).catch((error)=> {
-
-                })
-                this.isLoading=false
-                }
-                
-            },
             openExtra(uuid) {
                 this.catuuid = uuid;
                     this.$modal.show('addExtra');

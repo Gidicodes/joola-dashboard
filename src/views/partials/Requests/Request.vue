@@ -72,7 +72,7 @@
                       <label>User</label>
                     </div>
                     <div class="col">
-                      <span>{{ first_name }} {{ last_name }}</span>
+                      <router-link :to="user_id"><span>{{ first_name }} {{ last_name }}</span></router-link>
                     </div>
                   </div>
                   <div class="row my-3">
@@ -104,7 +104,7 @@
                       <label>Driver</label>
                     </div>
                     <div class="col">
-                      <span>{{ driver }}</span>
+                      <router-link :to="driver_id"><span >{{ driver }}</span></router-link>
                     </div>
                   </div>
                   <div class="row my-5">
@@ -169,6 +169,8 @@ export default {
       last_name: "",
       address: "",
       driver: null,
+      driver_id:'',
+      user_id: '',
       created_at: "",
       sortable: true,
       searchable: true,
@@ -208,13 +210,15 @@ export default {
       trip
         .getTrip({ id: id })
         .then(response => {
-          console.log(response)
           this.first_name = response.data.user.first_name;
           this.last_name = response.data.user.last_name;
           this.address = response.data.destinations.address;
+          this.user_id = "/users/"+response.data.user.uuid
           this.created_at = response.data.created_at;
           this.status = response.data.status.status;
           this.driver = response.data.driver !== null ? response.data.driver.first_name +' '+ response.data.driver.last_name : null
+          this.driver_id = response.data.driver !== null ? "/drivers/"+response.data.driver.uuid : null
+          
         })
         .catch(() => {});
     },
