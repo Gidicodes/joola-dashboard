@@ -110,3 +110,23 @@
     justify-content: flex-end;
     margin-bottom: 30px;
 }
+
+.sm-img-avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+
+.jo-notification-dropdown{
+    width: 375px;
+
+    a.dropdown-item{
+        padding: 13px 20px;
+    }
+}
+
+.jo-flex{
+    display:flex;
+    justify-content: space-between;
+}

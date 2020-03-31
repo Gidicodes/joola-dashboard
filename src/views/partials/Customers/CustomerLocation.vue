@@ -45,8 +45,11 @@
                                                 
                                                 
                                             </b-table>
+                                            <div class="float-left mt-2" >Page: {{ currentPage }} of {{Math.ceil(total/perPage) > 0 ? Math.ceil(total/perPage) : 1}}</div>
+                                            <div class="float-right">
                                             <b-pagination :per-page="perPage" :total-rows="total" size="md"
                                                           v-model="currentPage"></b-pagination>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
