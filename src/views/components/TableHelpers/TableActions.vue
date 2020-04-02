@@ -13,6 +13,7 @@
       <div>
         <b-dropdown
           id="dropdown-1"
+          :class="action.class"
           :text="action.title"
           :title="action.title || ''"
           

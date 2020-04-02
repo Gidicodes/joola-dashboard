@@ -10,8 +10,8 @@
         <SidebarMinimizer/>
       </AppSidebar>
       <main class="main">
-        <Breadcrumb :list="list"/>
-        <div class="container-fluid">
+        <!-- <Breadcrumb :list="list"/> -->
+        <div class="container-fluid mt-4">
           <router-view></router-view>
         </div>
       </main>

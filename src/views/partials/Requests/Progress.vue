@@ -13,25 +13,20 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
+                        <b-row md="12">
+                            <b-col class="col-m2-4"></b-col>
+
+                            <b-col class="jo-options" md="3">
+                                <span>Show</span>
+                                <b-form-select :options="pageOptions"
+                                                class="form-control"
+                                                v-model="perPage"></b-form-select>
+                            </b-col>
+                        </b-row>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"></h4>
-                                <!-- <Datatable :fields="fields" :data="paymentsData" :perPage="1"> -->
-                                <!-- </Datatable> -->
-
-                                <div class="card-body">
-                                    <h4 class="card-title"></h4>
-                                    <b-row>
-                                        <b-col class="float-left" md="3">
-                                            Choose entries
-                                            <b-form-select :options="pageOptions"
-                                                           class="form-control"
-                                                           v-model="perPage"></b-form-select>
-                                        </b-col>
-                                        <b-col class="col-m2-4"></b-col>
-                                    </b-row>
                                     <div class="row">
-                                        <div class="col-12 table-responsive">
+                                        <div class="col-12 table-responsive table-striped">
                                             <div class="mb-lg-5"></div>
                                             <b-table :busy="loading" :current-page="currentPage"
                                                      :fields="columnsHeader"
@@ -50,10 +45,15 @@
                                                                    ></table-actions>
                                                 </template>
                                             </b-table>
-                                            <b-pagination :per-page="perPage" :total-rows="total" size="md"
+                                            <div class="jo-flex">
+                                                <div class="mt-2" >Showing: {{ perPage }} of {{ total }} results</div>
+                                            <div class="">
+                                            <b-pagination :per-page="perPage" :total-rows="total" size="md" class="jo-paginate"
                                                           v-model="currentPage"></b-pagination>
+                                            </div>
+                                            
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +74,9 @@
 
     const action = [
         {
-            class: 'btn btn-primary btn-md',
-            text: 'Option',
-            title: "Option",
+            class: 'jo-action',
+            text: '...',
+            title: "...",
             dropdown: [
                 {
                     args: ['ID'],
