@@ -31,23 +31,9 @@ export default {
       },
       {
         
-        name: 'Referals',
-        icon: 'fa fa-user-circle',
-        url: '/referals',
-        class: '',
-      },
-      {
-        
         name: 'Settings',
         icon: 'fa fa-user-circle',
         url: '/settings',
-        class: '',
-      },
-      {
-        
-        name: 'Logs',
-        icon: 'fa fa-user-circle',
-        url: '/logs',
         class: '',
       },
       

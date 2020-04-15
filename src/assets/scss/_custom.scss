@@ -41,12 +41,19 @@
     }
   }
 
-  .sidebar .nav-link.active {
-    background: #F6F6F6;
-    border-radius: 0px 50px 50px 0px;
-    // width: 90%;
-    color: #252968
-  }
+  .sidebar {
+    .nav-link{
+        margin: 10px 0px;
+        padding-left:40px;
+        &.active {
+            background: #F6F6F6;
+            border-radius: 0px 50px 50px 0px;
+            // width: 90%;
+            color: #252968
+        }
+    }
+}
+
   .jo-input-dark{
       @extend .form-control;
       background: #F3F3F3 !important;
@@ -120,6 +127,8 @@
 
 .jo-notification-dropdown{
     width: 375px;
+    max-height: 400px;
+    overflow-y: auto;
 
     a.dropdown-item{
         padding: 13px 20px;

@@ -1,7 +1,10 @@
 // If you want to override variables do it here
 
 @import "variables";
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+body{
+    font-family: 'Nunito', sans-serif !important;
+}
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 

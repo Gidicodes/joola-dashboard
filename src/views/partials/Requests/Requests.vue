@@ -362,14 +362,14 @@
                 this.allContent = [];
                 this.total = data.total;
                 console.log(data.data)
-                data.data.forEach(({status: status, user: user, destinations: destinations, trip_start: trip_start, id:id}) => {
+                data.data.forEach(({status: status, user: user, destinations: destinations, created_at: created_at, id:id}) => {
                     this.allContent.push({
                         ID:id,
                         'Customer ID': user.uuid,
                         Username: user.first_name,
                         Email : user.email,
                         Location :destinations.address,
-                        Timestamp: trip_start,
+                        Timestamp: created_at,
                         Status: status.status,
                     });
                 });

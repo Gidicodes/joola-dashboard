@@ -2,7 +2,7 @@
     <AppHeader fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile />
       <b-link class="navbar-brand" to="#">
-        <img class="navbar-brand-full" src="/img/logo.svg" width="89" height="25" alt="Joola">
+        <img class="navbar-brand-full" src="/img/logo.svg" width="35" height="50" alt="Joola">
         <img class="navbar-brand-minimized" src="/img/logo.svg" width="30" height="30" alt="Joola">
       </b-link>
       <SidebarToggler class="d-md-down-none" display="lg" :defaultOpen=true />
