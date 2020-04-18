@@ -32,7 +32,7 @@ import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 import DefaultHeader from './DefaultHeader'
 import DefaultFooter from './DefaultFooter'
 import Route from '../router';
-import { mapActions } from "vuex";
+
 
 
 
@@ -65,32 +65,6 @@ export default {
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     }
-  },
-
-  async mounted() {
-      // Verify the User token is still valid
-      let loginValid = await this.$store.dispatch('AUTHORISE_USER', this.$store.getters.GET_AUTH_TOKEN);
-      // If login is not valid
-      if (!loginValid) {
-          this.$store.dispatch("UNSET_USER");
-          Route.push({name: 'login'});
-      }
-
-      this.$echo.channel('new-trip').listen('.trip.created', (payload) => {
-          this.$toastr.success('Click this button to <a href="requests/'+payload.data.id +'" class="btn btn-toast">View</a>' , 'New Trip Request', {onclick: null});
-          this.getNotification()
-      })
-      this.getNotification()
-  },
-  methods: {
-      ...mapActions({ notification: "GetNotification" }),
-      async getNotification() {
-        this.loading = true;
-        await this.notification().then((res)=> {
-          
-        }).catch((error)=> {
-        })
-      }
   }
     
 }
