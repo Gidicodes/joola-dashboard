@@ -29,17 +29,11 @@ Vue.use(VueToastr2);
 Vue.use(BootstrapVue)
 
 ApiService.init(process.env.VUE_APP_API_URL);
-// window.Echo = new Echo({
-//   broadcaster: 'socket.io',
-//   host: process.env.VUE_APP_QUEUE_URL + ':6001',
-//   auth: { headers: { Authorization: "Bearer " + store.getters.GET_AUTH_TOKEN } }
-// });
-// console.log(store.getters.GET_AUTH_TOKEN)
 
   
 Vue.use(VueEcho, {
   broadcaster: 'socket.io',
-  host: process.env.VUE_APP_QUEUE_URL + ':6001',
+  host: process.env.VUE_APP_QUEUE_URL,
   auth: { headers: { Authorization: "Bearer " + store.getters.GET_AUTH_TOKEN } }
 });
 
