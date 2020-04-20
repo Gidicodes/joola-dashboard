@@ -17,16 +17,11 @@ export default {
       Route.push({ name: 'login' });
     }
 
-    // this.$echo.private('private-user-chat-'+user.id).listen('NewUserChatEvent', (payload) => {
-    //   this.$toastr.success('New Message <a href="chat/'+payload.data.chat_id +'" class="btn btn-toast">View</a>' , 'New Message Alert', {onclick: null});
-    // })
     this.$echo
       .private('private-admin-chat')
       .listen('NewMessage', payload => {
         this.$toastr.success(
-          'New Message <a href="chat/' +
-            payload.data.chat_id +
-            '" class="btn btn-toast">View</a>',
+          'New Message <a href="chat/" class="btn btn-toast">View</a>',
           'New Message Alert',
           { onclick: null },
         );

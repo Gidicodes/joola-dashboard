@@ -6,6 +6,7 @@
           v-for="chat in chats"
           :key="chat.id"
           @click="viewChat(chat.id)"
+          :class="getActiveChat(chat.id)"
         >
           <div class="jo-chat-list-single">
             <img :src="chat.user.avatar_url" />
@@ -25,7 +26,7 @@
     <div class="jo-chat-message">
       <div class="jo-chat-message-section">
         <div v-for="(messages, key) in chat_messages" :key="key" class="jo-chat-message-date-group">
-            <span class="jo-chat-message-section-date">{{key}}</span>
+            <span class="jo-chat-message-section-date">{{dateToFromNowDaily(key)}}</span>
           <div
             v-for="message in messages"
             :key="message.id"
@@ -36,7 +37,7 @@
               <span>{{ message.author.first_name }}</span>
               <div class="jo-chat-message-section-chat-bubble">
                 <p>{{ message.message }}</p>
-                <span>{{ humanFormat(message.created_at) }}</span>
+                <span>{{ timeFormat(message.created_at) }}</span>
               </div>
             </div>
           </div>
@@ -83,8 +84,11 @@ export default {
           console.log(err);
         });
     },
+    getActiveChat(id){
+        return id === this.activeChat ? 'active': '';
+    },
     humanFormat(date) {
-      return moment(date).fromNow();
+      return moment(date).fromNow(true);
     },
     viewChat(id) {
       chat.getChatHistory({ id: id }).then(response => {
@@ -94,9 +98,6 @@ export default {
     },
     formatMessage(data) {
       this.chat_messages = [];
-    //   const new_data = Object.fromEntries(Object.entries(data).map(([key, value]) => {
-    //       return [key, value.slice().reverse()]
-    //   }))
       this.chat_messages = data;
     },
     isUser(uuid) {
@@ -115,7 +116,9 @@ export default {
         return;
       }
       chat.postMessage({ id: id, message: message }).then(response => {
-        this.chat_messages.push({
+        let lastProperty;
+        for (lastProperty in this.chat_messages);
+        this.chat_messages[lastProperty].push({
           ...response.data,
           author: this.$store.getters.GET_USER,
           class: 'sender',
@@ -123,6 +126,22 @@ export default {
       });
       this.user_message = '';
     },
+    timeFormat(date){
+        return moment(date).format("HH:mm");
+    },
+    dateToFromNowDaily( myDate ) {
+    let fromNow = moment( myDate ).fromNow();
+    return moment( myDate ).calendar( null, {
+        lastWeek: '[Last] dddd',
+        lastDay:  '[Yesterday]',
+        sameDay:  '[Today]',
+        nextDay:  '[Tomorrow]',
+        nextWeek: 'dddd',
+        sameElse: function () {
+            return "[" + fromNow + "]";
+        }
+    });
+    }
   },
 };
 </script>
