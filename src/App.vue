@@ -16,7 +16,7 @@ export default {
       this.$store.dispatch('UNSET_USER');
       Route.push({ name: 'login' });
     }
-    let user = this.$store.getters.GET_USER;
+
     // this.$echo.private('private-user-chat-'+user.id).listen('NewUserChatEvent', (payload) => {
     //   this.$toastr.success('New Message <a href="chat/'+payload.data.chat_id +'" class="btn btn-toast">View</a>' , 'New Message Alert', {onclick: null});
     // })
@@ -30,6 +30,7 @@ export default {
           'New Message Alert',
           { onclick: null },
         );
+        this.getNotification()
       })
       .listen('TripEvent', payload => {
         this.$toastr.success(
@@ -46,7 +47,6 @@ export default {
   },
   methods: {
     ...mapActions({ notification: 'GetNotification' }),
-
     async getNotification() {
       this.loading = true;
       await this.notification()
@@ -73,4 +73,3 @@ $simple-line-font-path: '~simple-line-icons/fonts/';
 // Import Main styles for this application
 @import 'assets/scss/style';
 </style>
-

@@ -2,10 +2,10 @@
   <AppHeaderDropdown right no-caret>
     <template slot="header">
       <img
-        src="img/avatars/6.jpg"
+        :src="user"
         class="sm-img-avatar"
-        alt="admin@bootstrapmaster.com" />
-    </template>\
+        alt="user" />
+    </template>
     <template slot="dropdown">
       <b-dropdown-item><i class="fa fa-user" /> Profile</b-dropdown-item>
       <b-dropdown-item><i class="fa fa-wrench" /> Settings</b-dropdown-item>
@@ -24,12 +24,16 @@ export default {
   components: {
     AppHeaderDropdown
   },
-  data: () => {
-    return { itemsCount: 42 , isloading:false}
+  computed: {
+    user: {
+      get(){
+        const url = this.$store.getters.GET_USER.avatar_url;
+        return  url != null ? url: 'img/avatars/6.jpg';
+      }
+    }
   },
   methods :{
     ...mapActions({loggedout: 'UNSET_USER'}),
-
   async logout() {
       this.loading = true;
       await this.loggedout().then((res)=> {
@@ -37,7 +41,6 @@ export default {
       });
   }
   
-
   }
 }
 </script>

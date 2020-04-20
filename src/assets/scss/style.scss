@@ -5,6 +5,7 @@
 body{
     font-family: 'Nunito', sans-serif !important;
 }
+@import "mixins";
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 

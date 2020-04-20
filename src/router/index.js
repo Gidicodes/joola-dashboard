@@ -20,7 +20,7 @@ const Drivers = () => import('@/views/partials/Drivers/Drivers')
 const Driver = () => import('@/views/partials/Drivers/Driver')
 
 const AddDriver = () => import('@/views/partials/Drivers/AddDriver')
-
+const Chat = () => import('@/views/partials/Chats/Chat');
 
 
 
@@ -154,6 +154,11 @@ function configRoutes() {
           path: 'driver/create',
           name: 'Add Drivers',
           component: AddDriver
+        },
+        {
+          path: 'chat',
+          name: 'Chat',
+          component: Chat
         },
 
       ]

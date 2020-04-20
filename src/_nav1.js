@@ -3,7 +3,7 @@ export default {
       {
         name: 'Dashboard',
         url: '/dashboard',
-        icon: 'icon-speedometer',
+        icon: 'icon-home',
         // badge: {
         //   variant: 'primary',
         //   text: 'NEW'
@@ -11,28 +11,35 @@ export default {
       },{
         
         name: 'Requests',
-        icon: 'fa fa-money',
+        icon: 'icon-wallet',
         url: '/requests',
         class: '',
       },
       {
         
         name: 'Customers',
-        icon: 'fa fa-user-circle',
+        icon: 'icon-user',
         url: '/customers'
         
       },
       {
         
         name: 'Drivers',
-        icon: 'fa fa-user-circle',
+        icon: 'icon-user',
         url: '/drivers',
         class: '',
       },
       {
         
+        name: 'Chat',
+        icon: 'icon-bubbles',
+        url: '/chat',
+        class: '',
+      },
+      {
+        
         name: 'Settings',
-        icon: 'fa fa-user-circle',
+        icon: 'icon-settings',
         url: '/settings',
         class: '',
       },
