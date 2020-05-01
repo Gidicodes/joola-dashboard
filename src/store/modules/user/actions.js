@@ -1,4 +1,5 @@
 import { userService } from "../../../services/user.service";
+import { setting } from "../../../services/setting.service";
 import { ApiService } from "../../../services/api.service";
 
 const actions = {
@@ -63,6 +64,14 @@ const actions = {
     }).catch((error)=> {
       return Promise.reject(error);
     });
+  },
+  GetBaseLocation: async(context) => {
+    return await setting.getBaseLocation().then((res)=> {
+      context.commit("SET_BASE_LOCATION", res.data)
+      return true
+    }).catch(error => {
+      return Promise.reject(error);
+    })
   }
 };
 

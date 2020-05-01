@@ -6,6 +6,7 @@ const state = {
     USER: '',
     AUTHENTICATION_TOKEN: '',
     NOTIFICATION: [],
+    BASE_LOCATION: '',
 };
 
 export default {state, getters, mutations, actions}

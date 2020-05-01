@@ -39,14 +39,18 @@ export default {
       });
 
     this.getNotification();
+    this.getLocation()
   },
   methods: {
-    ...mapActions({ notification: 'GetNotification' }),
+    ...mapActions({ notification: 'GetNotification', base_location: 'GetBaseLocation'}),
     async getNotification() {
       this.loading = true;
       await this.notification()
         .then(res => {})
         .catch(error => {});
+    },
+    async getLocation(){
+      await this.base_location().then(res => {}).catch(error => {});
     },
   },
 };

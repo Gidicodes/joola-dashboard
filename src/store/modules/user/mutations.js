@@ -3,12 +3,13 @@ const mutations = {
     SET_AUTH_TOKEN: (state, authentication) => {
         state.AUTHENTICATION_TOKEN = authentication;
     },
-    SET_NOTIFICATION:(state, notification) => state.NOTIFICATION = notification,
-    UPDATE_NOTIFICATIOn:(state, notification) => state.NOTIFICATION = [...state.NOTIFICATION, notification],
+    SET_NOTIFICATION: (state, notification) => state.NOTIFICATION = notification,
+    UPDATE_NOTIFICATIOn: (state, notification) => state.NOTIFICATION = [...state.NOTIFICATION, notification],
     REMOVE_AUTH: (state) => {
         state.AUTHENTICATION_TOKEN = '';
         state.USER = '';
     },
+    SET_BASE_LOCATION: (state, location) => state.BASE_LOCATION = location,
 };
 
-export {mutations};
+export { mutations };

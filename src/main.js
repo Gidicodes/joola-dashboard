@@ -13,9 +13,7 @@ import 'vue-toastr-2/dist/vue-toastr-2.min.css'
 import VModal from 'vue-js-modal'
 import App from './App'
 import router from './router'
-import Echo from 'laravel-echo'
 import VueEcho from 'vue-echo';
-
 
 // todo
 // cssVars()
@@ -36,6 +34,8 @@ Vue.use(VueEcho, {
   host: process.env.VUE_APP_QUEUE_URL,
   auth: { headers: { Authorization: "Bearer " + store.getters.GET_AUTH_TOKEN } }
 });
+
+
 
 
 if (store.dispatch('isLoggedIn')) {

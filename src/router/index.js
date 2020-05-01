@@ -21,7 +21,7 @@ const Driver = () => import('@/views/partials/Drivers/Driver')
 
 const AddDriver = () => import('@/views/partials/Drivers/AddDriver')
 const Chat = () => import('@/views/partials/Chats/Chat');
-
+const Setting = () => import('@/views/partials/Settings/Settings');
 
 
 
@@ -160,6 +160,11 @@ function configRoutes() {
           name: 'Chat',
           component: Chat
         },
+        {
+          path: 'settings',
+          name: 'Settings',
+          component: Setting
+        }
 
       ]
     },

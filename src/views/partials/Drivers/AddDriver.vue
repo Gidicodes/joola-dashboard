@@ -143,13 +143,7 @@
 
         methods: {
             genStr() {
-                var len=10
-                let text = " "
-                let chars = "abcdefghijklmnopqrstuvwxyz"
-                
-                for( let i=0; i < len; i++ ) {
-                    text += chars.charAt(Math.floor(Math.random() * chars.length))
-                }
+                let text = "joolaDriverPassword"
                 this.password = text;
                 return text
             },
