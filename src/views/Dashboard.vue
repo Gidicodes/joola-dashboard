@@ -1,66 +1,154 @@
 <template>
   <div class="animated fadeIn">
-    <b-row>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-primary">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              
-            </b-dropdown>
-            <h4 class="mb-0">{{users}}</h4>
-            <p>Users</p>
-          </b-card-body>
-          <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/>
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-info">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
-              <template slot="button-content">
-                <i class="icon-location-pin"></i>
-              </template>
-              
-            </b-dropdown>
-            <h4 class="mb-0">{{trucks}}</h4>
-            <p> Active Trucks</p>
-          </b-card-body>
-          <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/>
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-warning">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-            </b-dropdown>
-            <h4 class="mb-0">{{requests}}</h4>
-            <p>Requests</p>
-          </b-card-body>
-          <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/>
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-danger">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              
-            </b-dropdown>
-            <h4 class="mb-0">{{drivers}}</h4>
-            <p>Drivers</p>
-          </b-card-body>
-          <card-bar-chart-example chartId="card-chart-04" class="chart-wrapper px-3" style="height:70px;" height="70"/>
-        </b-card>
-      </b-col>
-    </b-row>
+    <div>
+      <label><b> Request Analytics</b></label>
+      <b-row>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{total_requests}}</h4>
+              <p>Total Requests</p>
+            </b-card-body>
+            <!-- <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
+                <template slot="button-content">
+                  <i class="icon-location-pin"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{pending_requests}}</h4>
+              <p> Pending Requests</p>
+            </b-card-body>
+            <!-- <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+              </b-dropdown>
+              <h4 class="mb-0">{{completed_requests}}</h4>
+              <p>Completed Requests</p>
+            </b-card-body>
+            <!-- <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/> -->
+          </b-card>
+        </b-col>
+      </b-row>
+    </div>
+    
+    <div>
+      <label><b> Driver Analytics</b></label>
+      <b-row>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{drivers}}</h4>
+              <p>Total Drivers</p>
+            </b-card-body>
+            <!-- <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
+                <template slot="button-content">
+                  <i class="icon-location-pin"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{active_drivers}}</h4>
+              <p> Active Drivers</p>
+            </b-card-body>
+            <!-- <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+              </b-dropdown>
+              <h4 class="mb-0">{{in_active_drivers}}</h4>
+              <p>In Active Drivers</p>
+            </b-card-body>
+            <!-- <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/> -->
+          </b-card>
+        </b-col>
+      </b-row>
+    </div>
+
+    <div>
+      <label> Customer Analytics</label>
+      <b-row>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{users}}</h4>
+              <p>Total Customers</p>
+            </b-card-body>
+            <!-- <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
+                <template slot="button-content">
+                  <i class="icon-location-pin"></i>
+                </template>
+                
+              </b-dropdown>
+              <h4 class="mb-0">{{active_users}}</h4>
+              <p> Active Customers</p>
+            </b-card-body>
+            <!-- <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+              </b-dropdown>
+              <h4 class="mb-0">{{new_users}}+</h4>
+              <p>New Customers</p>
+            </b-card-body>
+            <!-- <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/> -->
+          </b-card>
+        </b-col>
+      </b-row>
+    </div>
 
   </div>
 </template>
@@ -91,10 +179,17 @@ export default {
   data: function () {
     return {
       selected: 'Month',
-      users: 0,
-      requests: 0,
       trucks: 0,
-      drivers: 0,
+      total_requests:0,
+      pending_requests: 0,
+      completed_requests: 0,
+      total_drivers: 0,
+      in_active_drivers: 0,
+      active_drivers: 0,
+      users: 0,
+      new_users: 0,
+      active_users: 0,
+      in_active_users: 0,
     }
   },
   async created() {
@@ -123,8 +218,14 @@ export default {
           let data = response.data
           this.users = data.users;
           this.drivers = data.drivers;
-          this.trucks= data.trucks
-
+          this.total_requests= data.all_trips;
+          this.pending_requests = data.pending_trips;
+          this.completed_requests = data.completed_trips;
+          this.active_drivers = data.active_drivers;
+          this.active_users = data.active_users;
+          this.in_active_users = data.in_active_users;
+          this.in_active_drivers = data.in_active_drivers;
+          this.new_users = data.new_users;
         }).catch(()=> {
             this.$toastr.error('Something Went wrong')
         })
@@ -133,9 +234,15 @@ export default {
 }
 </script>
 
-<style>
-  /* IE fix */
+<style lang="scss" scoped>
+/* IE fix */
   #card-chart-01, #card-chart-02 {
     width: 100% !important;
   }
+  .bg-outline{
+    box-shadow: -10px 10px 30px rgba(30, 30, 30, 0.05) !important;
+    border-radius: 20px;
+    padding: 0.5rem 0.25rem;
+  }
 </style>
+  
