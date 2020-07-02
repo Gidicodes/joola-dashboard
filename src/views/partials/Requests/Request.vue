@@ -4,8 +4,6 @@
       <modal :height="700" @before-open="beforeOpen" name="getDrivers">
         <div class="modal-header">Assign Driver</div>
         <div class="modal-body">
-          <!-- <div class="modal-content" style="background-color:#FFF"> -->
-          <!-- <div class="row"> -->
           <div>
             <label>Set Trip Amount</label>
             <div class="jo-form">
@@ -98,12 +96,29 @@
                   </div>
                   <div class="row my-3">
                     <div class="col">
+                      <label>Due Date</label>
+                    </div>
+                    <div class="col">
+                      <span>{{ user_details.due_date }}</span>
+                    </div>
+                  </div>
+                  <div class="row my-3">
+                    <div class="col">
+                      <label>Requester Comment</label>
+                    </div>
+                    <div class="col">
+                      <span>{{ user_details.comment }}</span>
+                    </div>
+                  </div>
+                  <div class="row my-3">
+                    <div class="col">
                       <label>Distance From Base</label>
                     </div>
                     <div class="col">
                       <span>{{ distance }}</span>
                     </div>
                   </div>
+                  
                   <div class="row my-3">
                     <div class="col">
                       <label>Estimated Time From Base</label>
@@ -195,6 +210,7 @@ export default {
       isPromo: false,
       loadingText: 'loading',
       currentAd: '',
+      user_details: {},
       currentAmount: 0,
       currentReference: '',
       user: this.$store.getters.GET_USER,
@@ -244,6 +260,7 @@ export default {
               ? '/drivers/' + response.data.driver.uuid
               : null;
           this.destination = response.data.destinations;
+          this.user_details = response.data;
           this.getLocationDiff();
         })
         .catch(() => {});
@@ -277,8 +294,6 @@ export default {
           });
         },
       );
-
-      console.log(this.allContent);
       this.loading = false;
     },
 

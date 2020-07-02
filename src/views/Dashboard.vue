@@ -41,6 +41,20 @@
                   <i class="icon-settings"></i>
                 </template>
               </b-dropdown>
+              <h4 class="mb-0">{{process_request}}</h4>
+              <p>Processing Requests</p>
+            </b-card-body>
+            <!-- <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/> -->
+          </b-card>
+        </b-col>
+        <b-col sm="6" lg="4">
+          <b-card no-body class="bg-outline">
+            <b-card-body class="pb-0">
+              <b-dropdown class="float-right" variant="transparent p-0" right>
+                <template slot="button-content">
+                  <i class="icon-settings"></i>
+                </template>
+              </b-dropdown>
               <h4 class="mb-0">{{completed_requests}}</h4>
               <p>Completed Requests</p>
             </b-card-body>
@@ -68,7 +82,7 @@
             <!-- <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
           </b-card>
         </b-col>
-        <b-col sm="6" lg="4">
+        <!-- <b-col sm="6" lg="4">
           <b-card no-body class="bg-outline">
             <b-card-body class="pb-0">
               <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
@@ -80,10 +94,9 @@
               <h4 class="mb-0">{{active_drivers}}</h4>
               <p> Active Drivers</p>
             </b-card-body>
-            <!-- <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
           </b-card>
-        </b-col>
-        <b-col sm="6" lg="4">
+        </b-col> -->
+        <!-- <b-col sm="6" lg="4">
           <b-card no-body class="bg-outline">
             <b-card-body class="pb-0">
               <b-dropdown class="float-right" variant="transparent p-0" right>
@@ -94,9 +107,8 @@
               <h4 class="mb-0">{{in_active_drivers}}</h4>
               <p>In Active Drivers</p>
             </b-card-body>
-            <!-- <card-line3-chart-example chartId="card-chart-03" class="chart-wrapper" style="height:70px;" height="70"/> -->
           </b-card>
-        </b-col>
+        </b-col> -->
       </b-row>
     </div>
 
@@ -118,7 +130,7 @@
             <!-- <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
           </b-card>
         </b-col>
-        <b-col sm="6" lg="4">
+        <!-- <b-col sm="6" lg="4">
           <b-card no-body class="bg-outline">
             <b-card-body class="pb-0">
               <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
@@ -130,9 +142,8 @@
               <h4 class="mb-0">{{active_users}}</h4>
               <p> Active Customers</p>
             </b-card-body>
-            <!-- <card-line2-chart-example chartId="card-chart-02" class="chart-wrapper px-3" style="height:70px;" :height="70"/> -->
           </b-card>
-        </b-col>
+        </b-col> -->
         <b-col sm="6" lg="4">
           <b-card no-body class="bg-outline">
             <b-card-body class="pb-0">
@@ -182,6 +193,7 @@ export default {
       trucks: 0,
       total_requests:0,
       pending_requests: 0,
+      process_request: 0,
       completed_requests: 0,
       total_drivers: 0,
       in_active_drivers: 0,
