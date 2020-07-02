@@ -232,6 +232,7 @@ export default {
           this.drivers = data.drivers;
           this.total_requests= data.all_trips;
           this.pending_requests = data.pending_trips;
+          this.process_request = data.processing_trips;
           this.completed_requests = data.completed_trips;
           this.active_drivers = data.active_drivers;
           this.active_users = data.active_users;

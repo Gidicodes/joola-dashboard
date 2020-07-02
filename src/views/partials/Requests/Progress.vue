@@ -42,6 +42,7 @@
                                                     <table-actions :actions=actions
                                                                    :data=data.item
                                                                    @view="view"
+                                                                   @openTracker="$router.push('/trucks/track')"
                                                                    ></table-actions>
                                                 </template>
                                             </b-table>
@@ -90,8 +91,8 @@
                 },
                 {
                     args: ['uuid'],
-                    callback: 'viewDetail',
-                    text: 'Assign Driver',
+                    callback: 'openTracker',
+                    text: 'Track Truck',
                 },
                 {
                     args: ['uuid'],

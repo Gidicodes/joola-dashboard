@@ -8,35 +8,14 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
               <i class="mdi mdi-account-card-details"></i>
             </span>
-            Settings
-            <div class="jo-flow">
-                <b-button  class=" btn jo-blue btn-md" to="/trucks/track"><span>Track Trucks</span></b-button>
-            </div>
+            Track Trucks
           </h3>
         </div>
         <div class="row mt-3">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h5>Base Location</h5>
-                <div class="jo-form">
-                  <input
-                    class="jo-form-group"
-                    v-model="address"
-                    @keyup.enter="searchPlace()"
-                    placeholder="Enter the Location Address"
-                  />
-                  <b-button @click="searchPlace()">Search</b-button>
-                </div>
-
-                <div id="map" ref="map"></div>
-
-                <div class="jo-flex">
-                  <b-button
-                    class="btn jo-blue ml-auto"
-                    @click="setBaseLocation()"
-                  >Set As Base Location</b-button>
-                </div>
+                <iframe id="track" src="http://monitor.fleetrakams.com/?sid=029c1b0aa860589367a0b60d9fce72fb" ref="track"/>
               </div>
             </div>
           </div>
@@ -121,7 +100,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-  height: 400px;
+#track {
+  height: 600px;
+  width: 100%;
 }
 </style>

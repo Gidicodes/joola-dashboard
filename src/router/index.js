@@ -22,6 +22,8 @@ const Driver = () => import('@/views/partials/Drivers/Driver')
 const AddDriver = () => import('@/views/partials/Drivers/AddDriver')
 const Chat = () => import('@/views/partials/Chats/Chat');
 const Setting = () => import('@/views/partials/Settings/Settings');
+const TrackTruck = () => import('@/views/partials/Settings/TrackDriver');
+
 
 
 
@@ -164,6 +166,11 @@ function configRoutes() {
           path: 'settings',
           name: 'Settings',
           component: Setting
+        },
+        {
+          path: 'trucks/track',
+          name: 'Trucks',
+          component: TrackTruck
         }
 
       ]
